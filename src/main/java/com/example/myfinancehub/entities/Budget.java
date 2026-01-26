@@ -27,4 +27,12 @@ public class Budget {
     @Column(nullable = false)
     private double limitAmount;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
 }

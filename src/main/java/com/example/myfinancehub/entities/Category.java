@@ -4,6 +4,8 @@ import com.example.myfinancehub.enums.TransactionType;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Builder
@@ -26,4 +28,14 @@ public class Category {
 
     @Column(nullable = false)
     private boolean isDefault = false;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @OneToMany(mappedBy = "category")
+    private List<Transaction> transactions;
+
+    @OneToMany(mappedBy = "category")
+    private List<Budget> budgets;
 }

@@ -36,4 +36,17 @@ public class Transaction {
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
     private PaymentMethod paymentMethod;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
 }

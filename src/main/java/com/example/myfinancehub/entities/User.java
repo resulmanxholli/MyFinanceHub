@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -34,5 +35,18 @@ public class User {
 
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    @OneToMany(mappedBy = "user")
+    private List<Account> accounts;
+
+    @OneToMany(mappedBy = "user")
+    private List<Transaction> transactions;
+
+    @OneToMany(mappedBy = "user")
+    private List<Category> categories;
+
+    @OneToMany(mappedBy = "user")
+    private List<Budget> budgets;
+
 
 }

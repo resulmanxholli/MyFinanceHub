@@ -4,6 +4,8 @@ import com.example.myfinancehub.enums.AccountType;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Builder
@@ -26,4 +28,11 @@ public class Account {
 
     @Column(nullable = false)
     private double initialBalance = 0;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @OneToMany(mappedBy = "account")
+    private List<Transaction> transactions;
 }
