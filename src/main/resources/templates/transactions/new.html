@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en"
+      th:replace="shared/_layout::layout('New Transaction', ~{::div#palidhje},null,null)">
+<div id="palidhje" class="container py-5">
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+
+            <!-- Card -->
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-header bg-white border-0 pt-4 px-4">
+                    <h3 class="mb-1 fw-bold">Create New Transaction</h3>
+                    <p class="text-muted mb-0">Add a new income or expense</p>
+                </div>
+
+                <div class="card-body p-4">
+                    <form th:action="@{/transactions/new}"
+                          th:object="${transaction}"
+                          method="post"
+                          class="needs-validation"
+                          novalidate>
+
+                        <!-- Amount -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Amount</label>
+                            <input type="number"
+                                   step="0.01"
+                                   class="form-control form-control-lg rounded-3"
+                                   th:field="*{amount}"
+                                   required>
+                            <div class="invalid-feedback">
+                                Please enter an amount.
+                            </div>
+                        </div>
+
+                        <!-- Type -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Transaction Type</label>
+                            <select class="form-select form-select-lg rounded-3"
+                                    th:field="*{type}"
+                                    required>
+                                <option value="" disabled selected>Select type...</option>
+                                <option th:each="t : ${types}"
+                                        th:value="${t}"
+                                        th:text="${t}">
+                                </option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a transaction type.
+                            </div>
+                        </div>
+
+                        <!-- Date -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Date</label>
+                            <input type="date"
+                                   class="form-control form-control-lg rounded-3"
+                                   th:field="*{date}"
+                                   required>
+                        </div>
+
+                        <!-- Payment Method -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Payment Method</label>
+                            <select class="form-select form-select-lg rounded-3"
+                                    th:field="*{paymentMethod}"
+                                    required>
+                                <option value="" disabled selected>Select payment method...</option>
+                                <option th:each="pm : ${paymentMethods}"
+                                        th:value="${pm}"
+                                        th:text="${pm}">
+                                </option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Category</label>
+                            <select class="form-select form-select-lg rounded-3"
+                                    th:field="*{categoryId}"
+                                    required>
+                                <option value="" disabled selected>Select category...</option>
+                                <option th:each="cat : ${categories}"
+                                        th:value="${cat.id}"
+                                        th:text="${cat.name}">
+                                </option>
+
+                            </select>
+
+                            <div class="invalid-feedback">
+                                Please select a category.
+                            </div>
+                        </div>
+
+                        <!-- Note -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Note</label>
+                            <textarea class="form-control rounded-3"
+                                      rows="3"
+                                      th:field="*{note}"
+                                      placeholder="Optional note..."></textarea>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="d-flex gap-2 justify-content-end">
+                            <a th:href="@{/transactions}"
+                               class="btn btn-outline-secondary px-4 rounded-3">
+                                Cancel
+                            </a>
+                            <button type="submit"
+                                    class="btn btn-primary px-4 rounded-3">
+                                Save Transaction
+                            </button>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+
+            <div class="text-center mt-3 text-muted small">
+                Keep your finances under control 💸
+            </div>
+
+        </div>
+    </div>
+
+</div>
+</html>

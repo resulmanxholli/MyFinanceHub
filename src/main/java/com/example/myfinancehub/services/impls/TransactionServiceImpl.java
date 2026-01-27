@@ -1,25 +1,23 @@
 package com.example.myfinancehub.services.impls;
 
 import com.example.myfinancehub.dtos.TransactionDto;
-import com.example.myfinancehub.entities.Transaction;
-import com.example.myfinancehub.exceptions.categories.CategoryConflictException;
+import com.example.myfinancehub.enums.CategoryType;
 import com.example.myfinancehub.exceptions.categories.CategoryNotFoundException;
 import com.example.myfinancehub.exceptions.transactions.TransactionConflictException;
 import com.example.myfinancehub.exceptions.transactions.TransactionNotFoundException;
-import com.example.myfinancehub.mappers.TranscationMapper;
-import com.example.myfinancehub.repositories.TranscationRepository;
-import com.example.myfinancehub.services.TranscationService;
+import com.example.myfinancehub.mappers.TransactionMapper;
+import com.example.myfinancehub.repositories.TransactionRepository;
+import com.example.myfinancehub.services.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@
-        RequiredArgsConstructor
-public class TranscationServiceImpl implements TranscationService {
-    private final TranscationRepository repository;
-    private final TranscationMapper mapper;
+@RequiredArgsConstructor
+public class TransactionServiceImpl implements TransactionService {
+    private final TransactionRepository repository;
+    private final TransactionMapper mapper;
 
     @Override
     public TransactionDto add(TransactionDto dto) {
@@ -60,4 +58,13 @@ public class TranscationServiceImpl implements TranscationService {
         }
         repository.deleteById(id);
     }
+
+    @Override
+    public List<TransactionDto> findByType(CategoryType type) {
+        return repository.findByType(type)
+                .stream()
+                .map(mapper::toDto)
+                .toList();
+    }
+
 }

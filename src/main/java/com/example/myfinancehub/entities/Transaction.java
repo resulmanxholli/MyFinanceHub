@@ -1,7 +1,7 @@
 package com.example.myfinancehub.entities;
 
 import com.example.myfinancehub.enums.PaymentMethod;
-import com.example.myfinancehub.enums.TransactionType;
+import com.example.myfinancehub.enums.CategoryType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,12 +20,12 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, precision = 12, scale = 2)
-    private BigDecimal amount;
+    @Column(nullable = false)
+    private double amount;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
-    private TransactionType type;
+    private CategoryType type;
 
     @Column(nullable = false)
     private LocalDate date;
@@ -38,7 +38,7 @@ public class Transaction {
     private PaymentMethod paymentMethod;
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
     @ManyToOne

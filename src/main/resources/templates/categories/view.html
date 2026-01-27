@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en"
+      th:replace="shared/_layout::layout('View Category', ~{::div#palidhje},null,null)">
+<div id="palidhje" class="container py-5">
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-header bg-white border-0 pt-4 px-4">
+                    <h3 class="mb-1 fw-bold">View Category</h3>
+                    <p class="text-muted mb-0">Category details (read only)</p>
+                </div>
+
+                <div class="card-body p-4">
+
+                    <!-- Name -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Name</label>
+                        <input type="text"
+                               class="form-control form-control-lg rounded-3"
+                               th:value="${category.name}"
+                               readonly>
+                    </div>
+
+                    <!-- Transaction Type -->
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">Transaction Type</label>
+                        <input type="text"
+                               class="form-control form-control-lg rounded-3"
+                               th:value="${category.type}"
+                               readonly>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="d-flex gap-2 justify-content-end">
+                        <a th:href="@{/categories}"
+                           class="btn btn-outline-secondary px-4 rounded-3">
+                            Back
+                        </a>
+
+                        <a th:href="@{/categories/{id}/edit(id=${category.id})}"
+                           class="btn btn-primary px-4 rounded-3">
+                            Edit
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+</html>

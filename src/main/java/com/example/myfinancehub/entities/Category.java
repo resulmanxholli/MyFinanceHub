@@ -1,6 +1,6 @@
 package com.example.myfinancehub.entities;
 
-import com.example.myfinancehub.enums.TransactionType;
+import com.example.myfinancehub.enums.CategoryType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,7 +24,7 @@ public class Category {
     // Category can be EXPENSE only or INCOME only (or BOTH if you want later)
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
-    private TransactionType type;
+    private CategoryType type;
 
     @Column(nullable = false)
     private boolean isDefault = false;

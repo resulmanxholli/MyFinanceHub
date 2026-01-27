@@ -1,6 +1,6 @@
 package com.example.myfinancehub.enums;
 
-public enum TransactionType {
+public enum CategoryType {
     INCOME,
     EXPENSE
 }
