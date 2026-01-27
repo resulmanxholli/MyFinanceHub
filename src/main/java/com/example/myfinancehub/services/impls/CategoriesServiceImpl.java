@@ -5,7 +5,7 @@ import com.example.myfinancehub.exceptions.categories.CategoryConflictException;
 import com.example.myfinancehub.exceptions.categories.CategoryNotFoundException;
 import com.example.myfinancehub.mappers.CategoryMapper;
 import com.example.myfinancehub.repositories.CategoryRepository;
-import com.example.myfinancehub.services.CategoryService;
+import com.example.myfinancehub.services.CategoriesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class CategoryServiceImpl implements CategoryService {
+public class CategoriesServiceImpl implements CategoriesService {
     private final CategoryRepository repository;
     private final CategoryMapper mapper;
 

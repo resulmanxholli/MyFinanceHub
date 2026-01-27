@@ -1,6 +1,6 @@
 package com.example.myfinancehub.dtos;
 
-import com.example.myfinancehub.enums.TransactionType;
+import com.example.myfinancehub.enums.CategoryType;
 import lombok.*;
 
 @Getter
@@ -15,7 +15,7 @@ public class CategoryDto {
 
     private String name;
 
-    private TransactionType type;
+    private CategoryType type;
 
     private boolean isDefault;
 }
