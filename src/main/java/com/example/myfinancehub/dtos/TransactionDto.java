@@ -28,5 +28,5 @@ public class TransactionDto {
 
     private Long categoryId;
 
-    private CategoryDto categoryName;
+    private CategoryDto category;
 }

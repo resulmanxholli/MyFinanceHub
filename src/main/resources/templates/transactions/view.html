@@ -3,90 +3,96 @@
       th:replace="shared/_layout::layout('View Transaction', ~{::div#palidhje},null,null)">
 <div id="palidhje" class="container py-5">
 
-  <div class="row justify-content-center">
-    <div class="col-12 col-md-8 col-lg-6">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
 
-      <div class="card border-0 shadow-sm rounded-4">
-        <div class="card-header bg-white border-0 pt-4 px-4">
-          <h3 class="mb-1 fw-bold">View Transaction</h3>
-          <p class="text-muted mb-0">Transaction details (read only)</p>
-        </div>
+            <!-- Card -->
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-header bg-white border-0 pt-4 px-4">
+                    <h3 class="mb-1 fw-bold">View Transaction</h3>
+                    <p class="text-muted mb-0">Transaction details (read only)</p>
+                </div>
 
-        <div class="card-body p-4">
+                <div class="card-body p-4"
+                     th:object="${transaction}">
 
-          <!-- Amount -->
-          <div class="mb-3">
-            <label class="form-label fw-semibold">Amount</label>
-            <input type="text"
-                   class="form-control form-control-lg rounded-3"
-                   th:value="${transaction.amount}"
-                   readonly>
-          </div>
+                    <!-- Amount -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Amount</label>
+                        <input type="text"
+                               class="form-control form-control-lg rounded-3"
+                               th:value="*{amount}"
+                               readonly>
+                    </div>
 
-          <!-- Transaction Type -->
-          <div class="mb-3">
-            <label class="form-label fw-semibold">Transaction Type</label>
-            <input type="text"
-                   class="form-control form-control-lg rounded-3"
-                   th:value="${transaction.type}"
-                   readonly>
-          </div>
+                    <!-- Type -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Transaction Type</label>
+                        <input type="text"
+                               class="form-control form-control-lg rounded-3"
+                               th:value="*{type}"
+                               readonly>
+                    </div>
 
-          <!-- Date -->
-          <div class="mb-3">
-            <label class="form-label fw-semibold">Date</label>
-            <input type="text"
-                   class="form-control form-control-lg rounded-3"
-                   th:value="${transaction.date}"
-                   readonly>
-          </div>
+                    <!-- Date -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Date</label>
+                        <input type="text"
+                               class="form-control form-control-lg rounded-3"
+                               th:value="*{date}"
+                               readonly>
+                    </div>
 
-          <!-- Payment Method -->
-          <div class="mb-3">
-            <label class="form-label fw-semibold">Payment Method</label>
-            <input type="text"
-                   class="form-control form-control-lg rounded-3"
-                   th:value="${transaction.paymentMethod}"
-                   readonly>
-          </div>
+                    <!-- Payment Method -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Payment Method</label>
+                        <input type="text"
+                               class="form-control form-control-lg rounded-3"
+                               th:value="*{paymentMethod}"
+                               readonly>
+                    </div>
 
-          <!-- Category -->
-          <div class="mb-3">
-            <label class="form-label fw-semibold">Category</label>
-            <input type="text"
-                   class="form-control form-control-lg rounded-3"
-                   th:value="${transaction.categoryName.name}"
-                   readonly>
-          </div>
+                    <!-- Category -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Category</label>
+                        <input type="text"
+                               class="form-control form-control-lg rounded-3"
+                               th:value="*{category.name}"
+                               readonly>
+                    </div>
 
-          <!-- Note -->
-          <div class="mb-4">
-            <label class="form-label fw-semibold">Note</label>
-            <textarea class="form-control rounded-3"
-                      rows="3"
-                      readonly
-                      th:text="${transaction.note}">
+                    <!-- Note -->
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">Note</label>
+                        <textarea class="form-control rounded-3"
+                                  rows="3"
+                                  readonly
+                                  th:text="*{note}">
                         </textarea>
-          </div>
+                    </div>
 
-          <!-- Buttons -->
-          <div class="d-flex gap-2 justify-content-end">
-            <a th:href="@{/transactions}"
-               class="btn btn-outline-secondary px-4 rounded-3">
-              Back
-            </a>
+                    <!-- Buttons -->
+                    <div class="d-flex gap-2 justify-content-end">
+                        <a th:href="@{/transactions}"
+                           class="btn btn-outline-secondary px-4 rounded-3">
+                            Back
+                        </a>
 
-            <a th:href="@{/transactions/{id}/edit(id=${transaction.id})}"
-               class="btn btn-primary px-4 rounded-3">
-              Edit
-            </a>
-          </div>
+                        <a th:href="@{/transactions/{id}/edit(id=*{id})}"
+                           class="btn btn-primary px-4 rounded-3">
+                            Edit
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="text-center mt-3 text-muted small">
+                Review transaction details 💼
+            </div>
 
         </div>
-      </div>
-
     </div>
-  </div>
 
 </div>
 </html>
