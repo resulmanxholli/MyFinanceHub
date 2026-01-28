@@ -1,11 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-</head>
-<body>
-<h2>Home</h2>
+<html lang="en"
+      th:replace="shared/_layout::layout('Dashboard', ~{::div#palidhje},null,null)">
 
-</body>
+<div id="palidhje" class="container py-5">
+
+  <div class="row">
+    <div class="col-12 col-lg-8 mx-auto">
+      <div class="card border-0 shadow-sm rounded-4 mb-4">
+        <div class="card-body p-4">
+          <h3 class="display-6 fw-bold mb-1">Welcome to MyFinanceHub</h3>
+          <p class="lead text-muted mb-3">A simple way to track your income and expenses.</p>
+
+          <div class="d-flex gap-2">
+            <a th:href="@{/transactions}" class="btn btn-primary btn-sm">View Transactions</a>
+            <a th:href="@{/transactions/new}" class="btn btn-outline-primary btn-sm">New Transaction</a>
+            <a th:href="@{/categories}" class="btn btn-outline-secondary btn-sm">Categories</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-muted small text-center">Get started by adding a transaction or a category.</div>
+    </div>
+  </div>
+
+</div>
+
 </html>

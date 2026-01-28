@@ -18,8 +18,8 @@
 
                     <!-- Amount -->
                     <div class="mb-3">
-                        <label class="form-label fw-semibold">Amount</label>
-                        <input type="text"
+                        <label class="form-label fw-semibold" for="viewAmount">Amount</label>
+                        <input id="viewAmount" type="text"
                                class="form-control form-control-lg rounded-3"
                                th:value="*{amount}"
                                readonly>
@@ -27,8 +27,8 @@
 
                     <!-- Type -->
                     <div class="mb-3">
-                        <label class="form-label fw-semibold">Transaction Type</label>
-                        <input type="text"
+                        <label class="form-label fw-semibold" for="viewType">Transaction Type</label>
+                        <input id="viewType" type="text"
                                class="form-control form-control-lg rounded-3"
                                th:value="*{type}"
                                readonly>
@@ -36,8 +36,8 @@
 
                     <!-- Date -->
                     <div class="mb-3">
-                        <label class="form-label fw-semibold">Date</label>
-                        <input type="text"
+                        <label class="form-label fw-semibold" for="viewDate">Date</label>
+                        <input id="viewDate" type="text"
                                class="form-control form-control-lg rounded-3"
                                th:value="*{date}"
                                readonly>
@@ -45,8 +45,8 @@
 
                     <!-- Payment Method -->
                     <div class="mb-3">
-                        <label class="form-label fw-semibold">Payment Method</label>
-                        <input type="text"
+                        <label class="form-label fw-semibold" for="viewPayment">Payment Method</label>
+                        <input id="viewPayment" type="text"
                                class="form-control form-control-lg rounded-3"
                                th:value="*{paymentMethod}"
                                readonly>
@@ -54,8 +54,8 @@
 
                     <!-- Category -->
                     <div class="mb-3">
-                        <label class="form-label fw-semibold">Category</label>
-                        <input type="text"
+                        <label class="form-label fw-semibold" for="viewCategory">Category</label>
+                        <input id="viewCategory" type="text"
                                class="form-control form-control-lg rounded-3"
                                th:value="*{category.name}"
                                readonly>
@@ -63,8 +63,8 @@
 
                     <!-- Note -->
                     <div class="mb-4">
-                        <label class="form-label fw-semibold">Note</label>
-                        <textarea class="form-control rounded-3"
+                        <label class="form-label fw-semibold" for="viewNote">Note</label>
+                        <textarea id="viewNote" class="form-control rounded-3"
                                   rows="3"
                                   readonly
                                   th:text="*{note}">
@@ -74,12 +74,12 @@
                     <!-- Buttons -->
                     <div class="d-flex gap-2 justify-content-end">
                         <a th:href="@{/transactions}"
-                           class="btn btn-outline-secondary px-4 rounded-3">
+                           class="btn btn-outline-secondary btn-sm px-4 rounded-3">
                             Back
                         </a>
 
                         <a th:href="@{/transactions/{id}/edit(id=*{id})}"
-                           class="btn btn-primary px-4 rounded-3">
+                           class="btn btn-primary btn-sm px-4 rounded-3">
                             Edit
                         </a>
                     </div>
