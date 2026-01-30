@@ -21,7 +21,7 @@
                     </div>
                 </div>
 
-                <a th:href="@{/transactions/new}"
+                <a th:href="@{/transactions/new(type=${type})}"
                    class="btn btn-primary btn-sm rounded-3 px-3">
                     <i class="bi bi-plus-lg me-1"></i> New
                 </a>
@@ -29,18 +29,11 @@
 
             <ul class="nav nav-pills mb-3 gap-2">
 
-                <li class="nav-item">
-                    <a class="nav-link"
-                       th:classappend="${selectedType == null} ? 'active'"
-                       th:href="@{/transactions}">
-                        All
-                    </a>
-                </li>
 
                 <li class="nav-item">
                     <a class="nav-link"
                        th:classappend="${selectedType == 'INCOME'} ? 'active'"
-                       th:href="@{/transactions/type/INCOME}">
+                       th:href="@{/transactions/INCOME}">
                         Income
                     </a>
                 </li>
@@ -48,7 +41,7 @@
                 <li class="nav-item">
                     <a class="nav-link"
                        th:classappend="${selectedType == 'EXPENSE'} ? 'active'"
-                       th:href="@{/transactions/type/EXPENSE}">
+                       th:href="@{/transactions/EXPENSE}">
                         Expense
                     </a>
                 </li>

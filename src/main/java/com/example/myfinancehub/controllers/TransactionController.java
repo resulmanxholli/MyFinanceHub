@@ -24,31 +24,62 @@ public class TransactionController {
     @GetMapping
     public String list(Model model) {
         model.addAttribute("transactions", transcationService.findAll());
+        model.addAttribute("selectedType", null);
         return "transactions/list";
     }
 
     @GetMapping("/new")
-    public String newTransaction(Model model) {
+    public String newTransaction(
+            @RequestParam(required = false) CategoryType type,
+            Model model) {
+
         model.addAttribute("transaction", new TransactionDto());
-        model.addAttribute("types", CategoryType.values());
         model.addAttribute("paymentMethods", PaymentMethod.values());
-        model.addAttribute("categories", categoriesService.findAll());
+
+        if (type == CategoryType.INCOME) {
+            model.addAttribute("categories",
+                    categoriesService.findByType(CategoryType.INCOME));
+            model.addAttribute("types", CategoryType.INCOME);
+        } else {
+            model.addAttribute("categories",
+                    categoriesService.findByType(CategoryType.EXPENSE));
+            model.addAttribute("types", CategoryType.EXPENSE);
+        }
+
         return "transactions/new";
     }
 
+
     @PostMapping("/new")
-    public String createTransaction(@Valid @ModelAttribute TransactionDto dto, BindingResult result ,Model model){
-        if(result.hasErrors()){
-            model.addAttribute("types", CategoryType.values());
+    public String createTransaction(
+            @RequestParam(required = false) CategoryType type,
+            @Valid @ModelAttribute("transaction") TransactionDto dto,
+            BindingResult result,
+            Model model) {
+
+        if (result.hasErrors()) {
+
             model.addAttribute("paymentMethods", PaymentMethod.values());
-            model.addAttribute("categories", categoriesService.findAll());
+
+            if (type == CategoryType.INCOME) {
+                model.addAttribute("categories",
+                        categoriesService.findByType(CategoryType.INCOME));
+                model.addAttribute("types", CategoryType.INCOME);
+            } else {
+                model.addAttribute("categories",
+                        categoriesService.findByType(CategoryType.EXPENSE));
+                model.addAttribute("types", CategoryType.EXPENSE);
+            }
+
             return "transactions/new";
         }
+
         transcationService.add(dto);
-        return "redirect:/transactions";
+        return "redirect:/transactions/" + type.name();
     }
 
-    @GetMapping("/type/{type}")
+
+    @GetMapping("/{type}")
     public String listByType(@PathVariable CategoryType type, Model model) {
         model.addAttribute("transactions", transcationService.findByType(type));
         model.addAttribute("types", type.name());
@@ -57,30 +88,46 @@ public class TransactionController {
 
     @GetMapping("{id}/edit")
     public String editTransaction(Model model, @PathVariable Long id) {
-        model.addAttribute("transaction", transcationService.findOne(id));
-        model.addAttribute("types", CategoryType.values());
+        TransactionDto transaction = transcationService.findOne(id);
+
+        model.addAttribute("transaction", transaction);
+        model.addAttribute("types", transaction.getType());
         model.addAttribute("paymentMethods", PaymentMethod.values());
-        model.addAttribute("categories", categoriesService.findAll());
+        model.addAttribute("categories", categoriesService.findByType(transaction.getType()));
         return "transactions/edit";
     }
 
     @PostMapping("/{id}/edit")
-    public String postCarEdit(@PathVariable long id, @Valid @ModelAttribute TransactionDto dto,
-                              BindingResult bindingResult, Model model) {
+    public String postTransactionEdit(@PathVariable long id,
+                                      @Valid @ModelAttribute("transaction") TransactionDto dto,
+                                      BindingResult bindingResult,
+                                      Model model) {
+
         if (dto.getId() != id) {
             dto.setId(id);
             bindingResult.rejectValue("id", "transaction.id", "Id doesn't match");
         }
+
         if (bindingResult.hasErrors()) {
-            model.addAttribute("type", CategoryType.values());
+
+            model.addAttribute("transaction", dto);
+
+            // vetëm një type
+            model.addAttribute("types", dto.getType());
+
             model.addAttribute("paymentMethods", PaymentMethod.values());
-            model.addAttribute("categories", categoriesService.findAll());
+            model.addAttribute("categories",
+                    categoriesService.findByType(dto.getType()));
+
             return "transactions/edit";
         }
 
         transcationService.modify(id, dto);
-        return "redirect:/transactions";
+
+        // redirect sipas type
+        return "redirect:/transactions/" + dto.getType().name();
     }
+
 
     @GetMapping("/{id}/view")
     public String viewTransaction(Model model, @PathVariable Long id) {
