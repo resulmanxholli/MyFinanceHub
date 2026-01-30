@@ -16,9 +16,17 @@
           <div class="card-body p-4">
             <form th:action="${actionUrl}"
                   th:object="${transaction}"
-                  method="post"
+                  th:method="post"
                   class="needs-validation"
                   novalidate>
+
+              <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+              <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger mb-3">
+                <ul>
+                  <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+                </ul>
+              </div>
 
               <!-- Amount -->
               <div class="mb-3">
@@ -50,7 +58,7 @@
               <div class="mb-3">
                 <label class="form-label fw-semibold" for="date">Date</label>
                 <input id="date"
-                       type="date"
+                       type="datetime-local"
                        class="form-control form-control-lg rounded-3"
                        th:field="*{date}"
                        required>

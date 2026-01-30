@@ -4,9 +4,11 @@ import com.example.myfinancehub.enums.PaymentMethod;
 import com.example.myfinancehub.enums.CategoryType;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -28,9 +30,11 @@ public class Transaction {
     private CategoryType type;
 
     @Column(nullable = false)
-    private LocalDate date;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    private LocalDateTime date;
 
-    @Column(length = 255)
+
+    @Column(length = 400)
     private String note;
 
     @Enumerated(EnumType.STRING)

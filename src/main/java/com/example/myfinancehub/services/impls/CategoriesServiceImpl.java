@@ -1,6 +1,7 @@
 package com.example.myfinancehub.services.impls;
 
 import com.example.myfinancehub.dtos.CategoryDto;
+import com.example.myfinancehub.enums.CategoryType;
 import com.example.myfinancehub.exceptions.categories.CategoryConflictException;
 import com.example.myfinancehub.exceptions.categories.CategoryNotFoundException;
 import com.example.myfinancehub.mappers.CategoryMapper;
@@ -55,5 +56,13 @@ public class CategoriesServiceImpl implements CategoriesService {
             throw new CategoryNotFoundException("Category not found");
         }
         repository.deleteById(id);
+    }
+
+    @Override
+    public List<CategoryDto> findByType(CategoryType type) {
+        return repository.findByType(type)
+                .stream()
+                .map(mapper::toDto)
+                .toList();
     }
 }

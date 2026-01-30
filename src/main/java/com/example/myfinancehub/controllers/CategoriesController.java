@@ -21,6 +21,7 @@ public class CategoriesController {
     @GetMapping
     public String list(Model model) {
         model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("selectedType", null);
         return "categories/list";
     }
 
@@ -39,6 +40,20 @@ public class CategoriesController {
         }
         categoryService.add(dto);
         return "redirect:/categories";
+    }
+
+    @GetMapping("/type/{type}")
+    public String listByType(@PathVariable String type, Model model) {
+        CategoryType catType;
+        try {
+            catType = CategoryType.valueOf(type.toUpperCase());
+        } catch (IllegalArgumentException ex) {
+            return "redirect:/categories";
+        }
+
+        model.addAttribute("categories", categoryService.findByType(catType));
+        model.addAttribute("selectedType", catType.name());
+        return "categories/list";
     }
 
     @GetMapping("/{id}/view")
